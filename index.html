@@ -87,7 +87,32 @@
   </form>
 
   <script>
-    // Your script goes here
+    (function () {
+      "use strict";
+
+      var input_password = Array.from(document.querySelectorAll('#change_username [type="password"]'));
+      var input_passwords = Array.from(document.querySelectorAll('#change_password [type="password"]'));
+
+      function toggle_visibility(array, checkbox) {
+        array.forEach(item => {
+          // if checked, it turns this input field into plain text input
+          item.type = checkbox.checked ? "text" : "password"
+        });
+      }
+
+      // add event listener to checkbox change (checked or not)
+      document.addEventListener("change", function (event) {
+        // loop through all inputs w/ type password
+        // arrow function keeps value of 'this' assigned to a checkbox
+        if (event.target.matches('#show-password')) {
+          toggle_visibility(input_password, event.target);
+        }
+
+        if (event.target.matches('#show-passwords')) {
+          toggle_visibility(input_passwords, event.target);
+        }
+      }, false);
+    })();
   </script>
 </body>
 
